@@ -6,8 +6,10 @@ import { useState } from "react";
 import { Card } from "./ui/card";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
+import useAuthModal from "@/hooks/useAuthModal";
 
-const RegisterModal = ({ onSwitch }: { onSwitch: () => void }) => {
+const RegisterModal = () => {
+    const { openLogin, close } = useAuthModal();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -29,16 +31,23 @@ const RegisterModal = ({ onSwitch }: { onSwitch: () => void }) => {
 
         try {
             const res = await axios.post("/api/auth/register", { email, password });
-            console.log("Register success:", res.data);
-            router.push("/");
+
+            if (res.data.message === "Verification email sent!") {
+                alert("Please check your email to verify your account.");
+                close();
+                router.refresh();
+            } else {
+                setError("Something went wrong. Please try again.");
+            }
         } catch (err: any) {
-            setError(err.response?.data?.error || "Registration failed");
+            const errorMsg = err?.response?.data?.error || "Registration failed";
+            setError(errorMsg);
         }
     };
 
     return (
         <Card className="w-full max-w-md p-6 shadow-lg rounded-lg bg-white">
-            <h2 className="text-2xl font-bold text-center mb-4">Login</h2>
+            <h2 className="text-2xl font-bold text-center mb-4">Register</h2>
 
             {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
@@ -63,22 +72,26 @@ const RegisterModal = ({ onSwitch }: { onSwitch: () => void }) => {
             </div>
 
             <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">password</label>
+                <label className="block text-sm font-medium text-gray-700">confirmPassword</label>
                 <Input 
                     type="password"
-                    placeholder="Enter your password"
-                    value={password}
+                    placeholder="Confirm your password"
+                    value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                 />
             </div>
 
-            <Button className="w-full mt-4" onClick={handleRegister}>
-                Login
+            <Button 
+                className="w-full mt-4" 
+                onClick={handleRegister} 
+                disabled={!email || !password || !confirmPassword}
+            >
+                Register
             </Button>
 
             <p className="text-center text-sm mt-4">
                 Already have an account?&nbsp;	
-                <a href="/register" className="text-blue-600">Login</a>
+                <button onClick={openLogin} className="text-blue-600">Login</button>
             </p>
         </Card>
     )

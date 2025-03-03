@@ -4,6 +4,7 @@ import { Inter } from "next/font/google"
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { CartProvider } from "@/providers/CartProvider";
+import AuthModal from "@/components/AuthModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="zh-TW">
       <body className={inter.className}>
+        <AuthModal />
         <CartProvider>
           <Navbar />
           <main className="container mx-auto p-4">{children}</main>

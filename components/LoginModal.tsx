@@ -3,11 +3,13 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import useAuthModal from "@/hooks/useAuthModal";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const LoginModal = ({ onSwitch }: { onSwitch: () => void }) => {
+const LoginModal = () => {
+    const { openRegister, close, setLoggedIn } = useAuthModal();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -21,9 +23,20 @@ const LoginModal = ({ onSwitch }: { onSwitch: () => void }) => {
         try {
             const res = await axios.post("/api/auth/login", { email, password });
             console.log("Login success:", res.data);
-            router.forward();
+            alert("Login successful");
+            setLoggedIn(true, email);
+            close();
+            router.refresh();
         } catch (err: any) {
-            setError(err.response?.data?.error || "Login failed");
+            const errorMsg = err.response?.data?.error || "Login failed";
+            setError(errorMsg);
+            if (errorMsg === "Invalid credentials") {
+                setError("Incorrect password. Please try again.");
+            } else if (errorMsg === "Account does not exist") {
+                setError("No account found with that email. Please register.");
+            } else {
+                setError("Login failed. Please try again.");
+            }
         }
     };
 
@@ -58,8 +71,8 @@ const LoginModal = ({ onSwitch }: { onSwitch: () => void }) => {
             </Button>
 
             <p className="text-center text-sm mt-4">
-                Don't have account yet?&nbsp;	
-                <a href="/register" className="text-blue-600">register</a>
+                Don't have account yet?&nbsp;
+                <button onClick={openRegister} className="text-blue-600">register</button>
             </p>
         </Card>
     );

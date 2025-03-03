@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import useAuthModal from "@/hooks/useAuthModal";
 import { useCart } from "@/hooks/useCart";
 import { Product } from "@/type";
 
@@ -9,7 +10,18 @@ interface ProductContentProps {
 }
 
 const ProductContent: React.FC<ProductContentProps> = ({ products }) => {
+    const { openLogin, isLoggedIn } = useAuthModal();
     const { addToCart } = useCart();
+
+    const handleAddToCart = (product: Product) => {
+        if (!isLoggedIn) {
+            alert("Please log in");
+            openLogin();
+        } else {
+            addToCart(product);
+            alert(`${product.name} has been add to your cart!`);
+        }
+    };
 
     return (
         <div className="container mx-auto p-4">
@@ -22,7 +34,7 @@ const ProductContent: React.FC<ProductContentProps> = ({ products }) => {
                         <h2 className="text-xl font-bold">{product.name}</h2>
                         <p className="text-gray-700">{product.description}</p>
                         <p className="mt-2 text-lg font-semibold">${product.price}</p>
-                        <Button variant="default" size="lg" className="mt-4 w-full" onClick={() => addToCart(product)}>
+                        <Button size="lg" className="mt-4 w-full" onClick={() => handleAddToCart(product)}>
                             Add to Cart
                         </Button>
                     </Card>
