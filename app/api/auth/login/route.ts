@@ -52,8 +52,7 @@ export async function POST(req: Request) {
         httpOnly: true,
         sameSite: "strict",
         maxAge: 31536000,
-        secure: false,
-        //secure: process.env.NODE_ENV === "production",
+        secure: process.env.NODE_ENV === "production",
     });
 
     return NextResponse.json({ user: { id: user.id, email: user.email, created_at: user.created_at} });
