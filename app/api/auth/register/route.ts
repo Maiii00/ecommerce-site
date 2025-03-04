@@ -1,6 +1,6 @@
+import { sendVerificationEmail } from "@/actions/getGmail";
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
-import { sendVerificationEmail } from "../gmail/route";
 
 const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
