@@ -54,7 +54,7 @@ export async function POST(req: Request) {
             react: VerificationEmail({ url: verifyUrl })
         });
         return NextResponse.json({ message: "Verification email sent!" });
-    } catch (err: any) {
+    } catch {
         return NextResponse.json({ error: "Failed to send verification email" }, { status: 500 });
     }
 

@@ -1,7 +1,6 @@
 "use client";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useCart } from "@/hooks/useCart";
-import { CartProvider } from "@/providers/CartProvider";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -20,8 +19,9 @@ export default function Navbar() {
             alert("Logout successful");
             router.push("/");
             router.refresh();
-        } catch (err: any) {
-            console.error("Logout failed", err.response?.data || err);
+        } catch (err: unknown) {
+            console.error("Logout failed", err);
+            alert("Logout failed. Please try again.");
         }
     }
 

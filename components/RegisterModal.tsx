@@ -39,9 +39,8 @@ const RegisterModal = () => {
             } else {
                 setError("Something went wrong. Please try again.");
             }
-        } catch (err: any) {
-            const errorMsg = err?.response?.data?.error || "Registration failed";
-            setError(errorMsg);
+        } catch (err: unknown) {;
+            setError(String(err));
         }
     };
 

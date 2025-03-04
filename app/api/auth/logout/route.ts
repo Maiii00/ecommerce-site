@@ -7,7 +7,7 @@ const supabase = createClient(
     process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
-export async function POST(req: Request) {
+export async function POST() {
     const cookieStore = await cookies();
     const sessionId = cookieStore.get("id")?.value;
 

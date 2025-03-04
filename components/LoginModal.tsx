@@ -27,16 +27,8 @@ const LoginModal = () => {
             setLoggedIn(true, email);
             close();
             router.refresh();
-        } catch (err: any) {
-            const errorMsg = err.response?.data?.error || "Login failed";
-            setError(errorMsg);
-            if (errorMsg === "Invalid credentials") {
-                setError("Incorrect password. Please try again.");
-            } else if (errorMsg === "Account does not exist") {
-                setError("No account found with that email. Please register.");
-            } else {
-                setError("Login failed. Please try again.");
-            }
+        } catch (err: unknown) {
+            setError(String(err));
         }
     };
 
@@ -71,7 +63,7 @@ const LoginModal = () => {
             </Button>
 
             <p className="text-center text-sm mt-4">
-                Don't have account yet?&nbsp;
+                Don&apos;t have account yet?&nbsp;
                 <button onClick={openRegister} className="text-blue-600">register</button>
             </p>
         </Card>
