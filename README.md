@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ecommerce-site
+ ![image](https://github.com/user-attachments/assets/e51fe3f6-bdb4-4727-a8ca-90694386dfd3)
 
-## Getting Started
+> 這是使用NextJs製作的一個電商網站範本，主要是訓練自己用。
 
-First, run the development server:
+- [https://ecommerce-site-two-mu.vercel.app/](https://ecommerce-site-two-mu.vercel.app/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 功能
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+ ![image](https://github.com/user-attachments/assets/b06df05a-6223-493f-bc66-7bf0e2101e77)
+ ![image](https://github.com/user-attachments/assets/4da6d5f4-644b-475d-bd21-9bb4e892274f)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+ 基本登入註冊操作
 
-## Learn More
+ ![image](https://github.com/user-attachments/assets/402f4161-19b8-4aa9-a1b8-26301a0aa21b)
 
-To learn more about Next.js, take a look at the following resources:
+ 登出則在導覽行進行
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+ ![image](https://github.com/user-attachments/assets/376edb38-f16a-491c-93c2-909d07b93a03)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+ 商品列表可加入至購物車
 
-## Deploy on Vercel
+ ![image](https://github.com/user-attachments/assets/b91fc396-6162-48ea-b5a0-f28f4ec0e11f)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+ 購物車可以進行更新、移除商品等動作
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+ ![image](https://github.com/user-attachments/assets/fcd8ebd9-321f-4d96-91e1-4c390e9d59e6)
+
+ 如果未登入下動作則提示需要登入
+
+## 未來規劃
+
+ - 新增toast優化ui
+ - 郵件密碼等作加密處理
+ - 加入cart api獲取用戶購物車
