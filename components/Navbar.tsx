@@ -1,17 +1,21 @@
 "use client";
 import useAuthModal from "@/hooks/useAuthModal";
+import { useCart } from "@/hooks/useCart";
+import { CartProvider } from "@/providers/CartProvider";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function Navbar() {
     const { openLogin, close, isLoggedIn, logout } = useAuthModal();
+    const { clearCart } = useCart();
     const router = useRouter();
 
     const handleLogout = async() => {
         try {
             await axios.post("/api/auth/logout");
             logout();
+            clearCart();
             close();
             alert("Logout successful");
             router.push("/");

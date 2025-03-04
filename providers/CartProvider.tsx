@@ -1,5 +1,6 @@
 "use client";
 
+import useAuthModal from "@/hooks/useAuthModal";
 import { CartItem, Product } from "@/type"
 import { createContext, ReactNode, useEffect, useState } from "react";
 
@@ -8,6 +9,7 @@ interface CartContextType {
     addToCart: (product: Product) => void;
     updateQuantity: (id: number, quantity: number) => void;
     removeFromCart: (id: number) => void;
+    clearCart: () => void;
 }
 
 export const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -19,8 +21,7 @@ export const CartProvider = ({
 }) => {
     const [cart, setCart] = useState<CartItem[]>([]);
 
-
-    const addToCart = (product: Product) => {
+    const handleAddToCart = (product: Product) => {
         setCart((prevCart) => {
             const existingItem = prevCart.find((item) => item.id === product.id);
             if (existingItem) {
@@ -33,7 +34,7 @@ export const CartProvider = ({
         });
     };
 
-    const updateQuantity = (id: number, quantity: number) => {
+    const handleUpdateQuantity = (id: number, quantity: number) => {
         setCart((prevCart) => 
             prevCart.map((item) =>
                 item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item
@@ -41,12 +42,21 @@ export const CartProvider = ({
         )
     }
 
-    const removeFromCart = (id: number) => {
+    const handleRemoveFromCart = (id: number) => {
         setCart((prevCart) => prevCart.filter((item) => item.id !==id));
     }
 
+    const handleClearCart = () => setCart([]);
+
   return (
-    <CartContext.Provider value={{ cart, addToCart, updateQuantity, removeFromCart }}>
+    <CartContext.Provider 
+        value={{ 
+            cart, 
+            addToCart: handleAddToCart, 
+            updateQuantity: handleUpdateQuantity, 
+            removeFromCart: handleRemoveFromCart, 
+            clearCart: handleClearCart }}
+        >
       {children}
     </CartContext.Provider>
   )

@@ -35,15 +35,15 @@ export async function POST(req: Request) {
         .select("*")
         .single();
 
-        if (sessionError) {
-            console.error("Session creation failed:", sessionError);
-            return NextResponse.json({ error: sessionError.message || "Failed to create session" }, { status: 500 });
-        }
-    
-        if (!session) {
-            console.error("Session is null or undefined");
-            return NextResponse.json({ error: "Failed to create session" }, { status: 500 });
-        }
+    if (sessionError) {
+        console.error("Session creation failed:", sessionError);
+        return NextResponse.json({ error: sessionError.message || "Failed to create session" }, { status: 500 });
+    }
+
+    if (!session) {
+        console.error("Session is null or undefined");
+        return NextResponse.json({ error: "Failed to create session" }, { status: 500 });
+    }
 
     const cookieStore = await cookies();
 
