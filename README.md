@@ -30,7 +30,7 @@
 
 ### 未登入提示
 
- --- 如果未登入下動作則提示需要登入
+ - 如果未登入下動作則提示需要登入
  ![image](https://github.com/user-attachments/assets/fcd8ebd9-321f-4d96-91e1-4c390e9d59e6)
 
  
