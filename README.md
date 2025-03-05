@@ -15,6 +15,7 @@
  
  登出則在導覽行進行
  ![image](https://github.com/user-attachments/assets/402f4161-19b8-4aa9-a1b8-26301a0aa21b)
+ ---
 
 ### 商品列表與購物車操作
 
@@ -23,11 +24,13 @@
 
  購物車可以進行更新、移除商品等動作
  ![image](https://github.com/user-attachments/assets/b91fc396-6162-48ea-b5a0-f28f4ec0e11f)
+ ---
 
 ### 未登入提示
 
  如果未登入下動作則提示需要登入
  ![image](https://github.com/user-attachments/assets/fcd8ebd9-321f-4d96-91e1-4c390e9d59e6)
+ ---
  
 ## 未來規劃
 
